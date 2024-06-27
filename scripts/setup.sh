@@ -5,9 +5,16 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	apt-get install -y git
 	apt-get install -y fzf
 	apt-get install -y curl
+	# zsh
 	apt-get install -y zsh
 	chsh -s $(which zsh)
+	# zoxide
 	curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+	# WezTerm
+	curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
+	echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+	apt-get update
+	apt-get install wezterm
 
 # Mac
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -15,6 +22,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	brew install git
 	brew install fzf
 	brew install zoxide
+	brew install --cask wezterm
 fi
 
 # OhMyZsh
