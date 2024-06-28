@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 WORKDIR /scripts
 COPY . /scripts
-RUN chmod +x setup.sh
-RUN /bin/bash setup.sh
+RUN chmod +x nix-setup.sh
+RUN /bin/bash nix-setup.sh
 
