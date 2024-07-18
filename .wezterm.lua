@@ -20,6 +20,7 @@ config.window_padding = {
 }
 config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
+config.front_end = "WebGpu"
 
 -- and finally, return the configuration to wezterm
 return config
