@@ -71,7 +71,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git)
+plugins=(git vi-mode zsh-autosuggestions tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,15 +105,36 @@ source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 # bun completions
 [ -s "/Users/DURAID01/.bun/_bun" ] && source "/Users/DURAID01/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="$HOME/.rover/bin:$PATH"
+export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
+export CI_SERVER_HOST=gitlab.kfplc.com
+export CI_JOB_TOKEN=JzzLH9EqSsZ9wB7rshdG
+# export CDK_DEFAULT_ACCOUNT=637423471129
+export CDK_DEFAULT_REGION=eu-west-1
+
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
+eval "$(navi widget zsh)"
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+
+# Source - https://stackoverflow.com/a
+# Posted by anon, modified by community. See post 'Timeline' for change history
+# Retrieved 2025-12-26, License - CC BY-SA 2.5
+# autoload -U edit-command-line
+# zle -N edit-command-line
+# bindkey -M vicmd v edit-command-line
+# export EDITOR=nvim
+
+VI_MODE_SET_CURSOR=true
+
+
+. "$HOME/.local/bin/env"
