@@ -249,7 +249,7 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  -- 'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -409,11 +409,30 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          mappings = {
+            i = {
+              ['<C-h>'] = function(prompt_bufnr)
+                local current_picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
+                local opts = current_picker.finder.opts or {}
+                opts.hidden = not opts.hidden
+                current_picker:refresh(
+                  require('telescope.finders').new_oneshot_job(vim.list_extend({ 'rg', '--files' }, opts.hidden and { '--hidden' } or {})),
+                  opts
+                )
+              end,
+              ['<C-i>'] = function(prompt_bufnr)
+                local current_picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
+                local opts = current_picker.finder.opts or {}
+                opts.no_ignore = not opts.no_ignore
+                current_picker:refresh(
+                  require('telescope.finders').new_oneshot_job(vim.list_extend({ 'rg', '--files' }, opts.no_ignore and { '--no-ignore' } or {})),
+                  opts
+                )
+              end,
+            },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
