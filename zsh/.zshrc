@@ -138,3 +138,4 @@ VI_MODE_SET_CURSOR=true
 
 
 . "$HOME/.local/bin/env"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
